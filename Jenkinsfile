@@ -17,8 +17,13 @@ pipeline {
             }
         }
         stage('Build') {
+            agent {
+                node {
+                    label "Docker";
+                }
+            }                
             steps {
-               sh 'exit 1'
+                sh 'docker build https://github.com/ '  
             }
         }
         stage('Delivery') {
