@@ -4,11 +4,12 @@
 Imports dependencies app
 """
 
-from crypt import methods
-from distutils.log import debug
-from pickle import FALSE
-from flask import Flask, request, jsonify
+#from crypt import methods
+#from distutils.log import debug
+#from pickle import FALSE
+
 from functools import wraps
+from flask import Flask, request, jsonify
 
 APP = Flask(__name__)
 
@@ -48,8 +49,7 @@ def check_card(func):
 @check_card
 def transaction():
     """
-    This function is resposible to expose the endpoint for receiving 
-    the incoming transaction
+    This function is resposible to expose the endpoint for receiving the incoming transaction
     """
     card = request.get_json()
     new_limit = card.get("limit") - card.get("transaction").get("amount")
