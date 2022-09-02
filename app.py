@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 
+"""
+Imports dependencies app
+"""
+
 from crypt import methods
 from distutils.log import debug
 from pickle import FALSE
@@ -10,9 +14,16 @@ APP = Flask(__name__)
 
 
 def check_card(func):
+    """
+    This function validates the credit card transactions
+    """
     wraps(func)
 
     def validation(*args, **kwargs):
+        """
+        This function is a decorator
+        which will return the function corresponding to the respective action
+        """
         data = request.get_json()
         if not data.get("status"):
             response = {
@@ -36,6 +47,10 @@ def check_card(func):
 @APP.route("/api/transaction", methods=["POST"])
 @check_card
 def transaction():
+    """
+    This function is resposible to expose the endpoint for receiving 
+    the incoming transaction
+    """
     card = request.get_json()
     new_limit = card.get("limit") - card.get("transaction").get("amount")
     response = {"approved": True, "newLimit": new_limit}
