@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Unit Test') {
             steps {
-               sh 'Testing the Applications'
+               sh 'echo Testing the Applications'
             }
         }
         stage('Build') {
