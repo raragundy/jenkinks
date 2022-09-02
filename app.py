@@ -6,11 +6,11 @@ from pickle import FALSE
 from flask import Flask, request, jsonify
 from functools import wraps
 
-app = Flask(__name__)
+APP = Flask(__name__)
 
 
-def check_card(f):
-    wraps(f)
+def check_card(func):
+    wraps(func)
 
     def validation(*args, **kwargs):
         data = request.get_json()
@@ -29,11 +29,11 @@ def check_card(f):
                 "reason": "Transaction above the limit"
             }
             return jsonify(response)
-        return f(*args, **kwargs)
-    return (validation)
+        return func(*args, **kwargs)
+    return validation
 
 
-@app.route("/api/transaction", methods=["POST"])
+@APP.route("/api/transaction", methods=["POST"])
 @check_card
 def transaction():
     card = request.get_json()
@@ -43,4 +43,4 @@ def transaction():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    APP.run(debug=True)
