@@ -9,6 +9,7 @@ pipeline {
         stage('Unit Tests') {
             steps {
                sh 'echo Testing the Applications'
+               sh 'exit 0'
             }
         }
         stage('Build') {
