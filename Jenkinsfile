@@ -23,17 +23,17 @@ pipeline {
                 }
             }                
             steps {
-                sh 'docker build https://github.com/ '  
-            }
-        }
-        stage('Delivery') {
-            steps {
-               sh 'exit 1'
+                sh 'docker build https://github.com/raragundy/jenkinks.git -t python3:sandbox'  
             }
         }
         stage('Deploy') {
+            agent {
+                node {
+                    label "Docker";
+                }
+            }                
             steps {
-               sh 'exit 1'
+                sh 'docker run -dit -p 5000:5000 python3:sandbox'  
             }
         }
     }
