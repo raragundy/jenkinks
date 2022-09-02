@@ -5,13 +5,13 @@ import tempfile
 
 import pytest
 
-from app import app
+from app import APP
 
 @pytest.fixture
 
 def client():
-    app.config['TESTING'] = True
-    client = app.test_client()
+    APP.config['TESTING'] = True
+    client = APP.test_client()
     
     
     yield client
@@ -20,7 +20,7 @@ def test_valid_transaction(client):
     card = {
         "status": True,
         "number": 123456,
-        "limit": 10000,
+        "limit": 1000,
         "transaction":{
              "amount":500,
             }
