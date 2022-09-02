@@ -6,7 +6,7 @@ pipeline {
                 sh 'echo Checking code quality'
             }            
         }
-        stage('Unit Test') {
+        stage('Unit Tests') {
             steps {
                sh 'echo Testing the Applications'
             }
